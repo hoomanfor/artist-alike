@@ -2,7 +2,7 @@ var artists = [
     {
         "name": "Carson McCullers",
         "photo": "https://via.placeholder.com/200x200.png",
-        "scores":[
+        "answers":[
             5,
             1,
             4,
@@ -18,7 +18,7 @@ var artists = [
     {
         "name": "David Berman",
         "photo": "https://via.placeholder.com/200x200.png",
-        "scores":[
+        "answers":[
             5,
             1,
             4,
