@@ -20,15 +20,15 @@ var artists = [
         "photo": "https://via.placeholder.com/200x200.png",
         "answers":[
             5,
-            1,
+            5,
             4,
             4,
             5,
-            1,
+            5,
             2,
             5,
             4,
-            1
+            5
         ]
     },
     {

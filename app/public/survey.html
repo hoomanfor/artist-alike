@@ -154,12 +154,12 @@
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h2 class="modal-title"><strong>Best Match</strong></h2>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
                     <h2 id="match-name"></h2>
-                    <img id="match-img" src="#" alt="">
+                    <img id="match-photo" src="#" alt="">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -175,10 +175,6 @@
 
         var compArr = [];
         var sum = 0;
-
-        function sortNumber(a, b) {
-            return a - b;
-        }
 
         $("#submit").on("click", function(event) {
             event.preventDefault(); 
@@ -220,7 +216,12 @@
                 console.log("compArr", compArr);
                 var mostCompSum = Math.min(...compArr);
                 var mostCompIndex = compArr.indexOf(mostCompSum);
-                console.log("mostCompSum, mostCompIndex", mostCompSum, mostCompIndex)
+                // console.log("mostCompSum, mostCompIndex", mostCompSum, mostCompIndex)
+                var matchName = data[mostCompIndex].name;
+                var matchPhoto = data[mostCompIndex].photo;
+                console.log(matchName, matchPhoto);
+                $("#match-name").html(matchName);
+                $("#match-photo").attr("src", matchPhoto);
             })
         })
     </script>
