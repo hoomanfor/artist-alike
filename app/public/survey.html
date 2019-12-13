@@ -31,7 +31,7 @@
         <!-- Questions -->
         <h3><strong>Question 1</strong></h3>
         <h4>If I was being charged by a ragging bull, I would rage right back at it.</h4>
-        <select class="chosen-select" id="q1">
+        <select class="chosen-select">
             <option value=""></option>
             <option value="1">1 (Heck no!)</option>
             <option value="2">2</option>
@@ -42,7 +42,7 @@
 
         <h3><strong>Question 2</strong></h3>
         <h4>Edamame is the best snack food known to man.</h4>
-        <select class="chosen-select" id="q2">
+        <select class="chosen-select">
             <option value=""></option>
             <option value="1">1 (Heck no!)</option>
             <option value="2">2</option>
@@ -53,7 +53,7 @@
 
         <h3><strong>Question 3</strong></h3>
         <h4>It is awe-inspiring to hear a musician play polyrhythms using a single instrument.</h4>
-        <select class="chosen-select" id="q3">
+        <select class="chosen-select">
             <option value=""></option>
             <option value="1">1 (Heck no!)</option>
             <option value="2">2</option>
@@ -64,7 +64,7 @@
 
         <h3><strong>Question 4</strong></h3>
         <h4>Being the center of attention makes uncomfortable.</h4>
-        <select class="chosen-select" id="q4">
+        <select class="chosen-select">
             <option value=""></option>
             <option value="1">1 (Heck no!)</option>
             <option value="2">2</option>
@@ -75,7 +75,7 @@
 
         <h3><strong>Question 5</strong></h3>
         <h4>"If you can't explain it simply, you don't understand it well enough."</h4>
-        <select class="chosen-select" id="q5">
+        <select class="chosen-select">
             <option value=""></option>
             <option value="1">1 (Heck no!)</option>
             <option value="2">2</option>
@@ -86,7 +86,7 @@
 
         <h3><strong>Question 6</strong></h3>
         <h4>I love going to parties.</h4>
-        <select class="chosen-select" id="q6">
+        <select class="chosen-select">
             <option value=""></option>
             <option value="1">1 (Heck no!)</option>
             <option value="2">2</option>
@@ -97,7 +97,7 @@
 
         <h3><strong>Question 7</strong></h3>
         <h4>I believe that most people have good intentions.</h4>
-        <select class="chosen-select" id="q7">
+        <select class="chosen-select">
             <option value=""></option>
             <option value="1">1 (Heck no!)</option>
             <option value="2">2</option>
@@ -108,7 +108,7 @@
 
         <h3><strong>Question 8</strong></h3>
         <h4>I would prefer to lose the sense of sight than the sense of hearing.</h4>
-        <select class="chosen-select" id="q8">
+        <select class="chosen-select">
             <option value=""></option>
             <option value="1">1 (Heck no!)</option>
             <option value="2">2</option>
@@ -119,7 +119,7 @@
 
         <h3><strong>Question 9</strong></h3>
         <h4>The 'Love of Writing' is more important than the 'Love of Words.'</h4>
-        <select class="chosen-select" id="q9">
+        <select class="chosen-select">
             <option value=""></option>
             <option value="1">1 (Heck no!)</option>
             <option value="2">2</option>
@@ -130,7 +130,7 @@
 
         <h3><strong>Question 10</strong></h3>
         <h4>Time management is one of my strongest qualities.</h4>
-        <select class="chosen-select" id="q10">
+        <select class="chosen-select">
             <option value=""></option>
             <option value="1">1 (Heck no!)</option>
             <option value="2">2</option>
@@ -172,6 +172,35 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <script type="text/javascript">
+        $("#submit").on("click", function(event) {
+            event.preventDefault(); 
+            var name = $("#name").val().trim(); 
+            var photo = $("#photo").val().trim();
+            console.log(name, photo)
+            var answers = []; 
+            $('select').each(function() {
+                if ($(this).val()) {
+                    answers.push($(this).val());
+                } else {
+                    answers.push(1);
+                    console.log("You have not completed all the questions!")
+                    // return false; 
+                }
+            });
+            var artist = {
+                name: name,
+                photo: photo,
+                answers: answers
+            };
+            console.log(artist);
+            $.post("/api/artists", artist, function(data) {
+                console.log("response", data);
+                $("#match-name").html(data.match_name);
+                $("#match-photo").attr("src", data.match_photo);
+            })
+        })
+    </script>
+    <!-- <script type="text/javascript">
 
         var compArr = [];
         var sum = 0;
@@ -197,6 +226,7 @@
                 answers: answers
             };
             console.log(artist);
+            compArr = [];
             $.get("/api/artists", function(data) {
                 for (var i = 0; i < data.length; i++) {
                     for (var j = 0; j < data[i].answers.length; j++) {
@@ -224,6 +254,6 @@
                 $("#match-photo").attr("src", matchPhoto);
             })
         })
-    </script>
+    </script> -->
   </body>
 </html>
