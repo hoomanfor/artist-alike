@@ -1,7 +1,7 @@
 var artists = [
     {
         "name": "Carson McCullers",
-        "photo": "https://via.placeholder.com/200x200.png",
+        "photo": "/images/carson.jpg",
         "answers":[
             2,
             1,
@@ -17,7 +17,7 @@ var artists = [
     },
     {
         "name": "David Berman",
-        "photo": "https://via.placeholder.com/200x200.png",
+        "photo": "/images/david.jpg",
         "answers":[
             5,
             5,
@@ -33,7 +33,7 @@ var artists = [
     },
     {
         "name": "Bill Callahan",
-        "photo": "https://via.placeholder.com/200x200.png",
+        "photo": "/images/bill.png",
         "answers":[
             1,
             1,
@@ -49,7 +49,7 @@ var artists = [
     },
     {
         "name": "Salvador Dalí",
-        "photo": "https://via.placeholder.com/200x200.png",
+        "photo": "/images/dali.jpg",
         "answers":[
             2,
             1,

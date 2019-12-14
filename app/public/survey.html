@@ -17,18 +17,23 @@
         }
     </style>
   </head>
-  <body>
+  <body class="bg-secondary">
 
-    <div class="container">
-        <h2>Survey Questions</h2>
+    <div class="container bg-light pb-4">
+        <h2 class="pt-4">Survey Questions</h2>
         <hr>
         <h3><strong>About You</strong></h3>
-        <h4>Name (Required)</h4>
+        <form>
+        <h4>Name</h4>
             <input type="text" id="name" class="form-control" required>
-        <h4>Link to Photo Image (Required)</h4>
-            <input type="text" id="photo" class="form-control" required>
+            <div id="invalid" class="text-danger d-none">
+                Please provide a name.
+            </div>
+        <h4>Link to Photo Image</h4>
+            <input type="text" id="photo" class="form-control">
         <hr>
         <!-- Questions -->
+        
         <h3><strong>Question 1</strong></h3>
         <h4>If I was being charged by a ragging bull, I would rage right back at it.</h4>
         <select class="chosen-select">
@@ -146,6 +151,7 @@
         <button type="submit" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#results-modal" id="submit">
             <i class="fa fa-check-circle" aria-hidden="true"></i>Submit
         </button>
+        </form>
     </div>
 
     <!-- Modal -->
@@ -157,12 +163,12 @@
                     <h2 class="modal-title"><strong>Best Match</strong></h2>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body text-center">
                     <h2 id="match-name"></h2>
-                    <img id="match-photo" src="#" alt="">
+                    <img id="match-photo" src="" alt="Artist Alike">
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -172,10 +178,18 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <script type="text/javascript">
+
         $("#submit").on("click", function(event) {
             event.preventDefault(); 
             var name = $("#name").val().trim(); 
             var photo = $("#photo").val().trim();
+            if (name == "") {
+                console.log("Enter a Name!")
+                $("#invalid").removeClass("d-none");
+                return false; 
+            } else {
+                $("#invalid").addClass("d-none")
+            }
             console.log(name, photo)
             var answers = []; 
             $('select').each(function() {
@@ -197,6 +211,11 @@
                 console.log("response", data);
                 $("#match-name").html(data.match_name);
                 $("#match-photo").attr("src", data.match_photo);
+            })
+            $("#name").val("");
+            $("#photo").val("");
+            $("select").each(function() {
+                $(this).val("");
             })
         })
     </script>
